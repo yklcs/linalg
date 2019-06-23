@@ -2,7 +2,6 @@
 
 [![PyPI version](https://badge.fury.io/py/linalg.svg)](https://badge.fury.io/py/linalg)
 
-
 ## What is this?
 
 NOT intended to be the best or fastest.

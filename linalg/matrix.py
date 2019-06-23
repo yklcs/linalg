@@ -1,13 +1,14 @@
 from operator import *
-
+import linalg
 
 class MatrixError(Exception):
     pass
 
 
 class Matrix:
-    """implements a matrix
+    """Implements Matrices.
     """
+
     def __init__(self, mat, valid=False):
         if not valid:
             try:
@@ -54,32 +55,7 @@ class Matrix:
         return a, S
 
     @staticmethod
-    def zeroes(i: int, j: int) -> "Matrix":
-        """creates an i by j zero matrix
-        
-        :param i: number of columns
-        :type i: int
-        :param j: number of rows
-        :type j: int
-        :return: an i by j matrix filled with zeroes
-        :rtype: Matrix
-        """
-        return Matrix([[0] * j for _ in range(i)], valid=True)
-
-    @staticmethod
-    def identity(n: int) -> "Matrix":
-        """generates an n by n identity matrix
-        
-        :param n: number of rows/columns
-        :type n: int
-        :return: n by b indentity matrix
-        :rtype: Matrix
-        """
-        id = [[int(i == j) for j in range(n)] for i in range(n)]
-        return Matrix(id)
-
-    @classmethod
-    def inverse(cls, mat:"Matrix") -> "Matrix":
+    def inverse(mat: "Matrix") -> "Matrix":
         """returns the inverse matrix of mat
         
         :param mat: the matrix to invert
@@ -88,14 +64,14 @@ class Matrix:
         :rtype: Matrix
         """
         assert mat._is_square()
-        return cls.solve(mat, cls.identity(mat.shape[0]))
+        return linalg.solve.solve(mat, linalg.create.identity(mat.shape[0]))
 
-    @classmethod
-    def transpose(cls, mat: "Matrix") -> "Matrix":
+    @staticmethod
+    def transpose(mat: "Matrix") -> "Matrix":
         x, y = mat.shape
         return Matrix([[mat[a][b] for a in range(y)] for b in range(x)])
 
-    @classmethod
+    @staticmethod
     def as_list(cls, mat: "Matrix") -> list:
         """returns the matrix as a list
         
@@ -106,33 +82,7 @@ class Matrix:
         """
         return mat.matrix
 
-    @classmethod
-    def lu(cls, mat: "Matrix") -> ("Matrix", "Matrix", "Matrix", int):
-        """implements LUP decomposition 
-
-        :return: returns a tuple with L, U, and P
-        :rtype: "Matrix", "Matrix", "Matrix", int
-        """
-        assert mat._is_square()
-
-        n = mat.shape[0]
-
-        L, U = cls.zeroes(n, n), cls.zeroes(n, n)
-        P, S = mat._pivotize()
-        A2 = P @ mat
-
-        for j in range(n):
-            L[j][j] = 1
-            for i in range(j + 1):
-                s1 = sum(U[k][j] * L[i][k] for k in range(i))
-                U[i][j] = A2[i][j] - s1
-            for i in range(j, n):
-                s2 = sum(U[k][j] * L[i][k] for k in range(j))
-                L[i][j] = (A2[i][j] - s2) / U[j][j]
-
-        return L, U, P, S
-
-    @classmethod
+    @staticmethod
     def det(cls, mat: "Matrix") -> float:
         """computes the determinant for a given matrix
         
@@ -143,44 +93,13 @@ class Matrix:
         """
         assert mat._is_square()
 
-        L, U, P, S = cls.lu(mat)
+        L, U, P, S = linalg.decompose.lu(mat)
         n = mat.shape[0]
         l_pd, u_pd = 1, 1
         for i in range(n):
             l_pd *= L[i][i]
             u_pd *= U[i][i]
         return (-1) ** S * l_pd * u_pd
-
-    @classmethod
-    def solve(cls, mat: "Matrix", b: "Matrix") -> "Matrix":
-        """solve a system of linear equations using LU decomposition
-       
-        :param mat: system of linear equations
-        :type mat: Matrix
-        :param b: column vector to solve for
-        :type b: Matrix
-        :return: the solution
-        :rtype: Matrix
-        """
-        L, U, P, S = cls.lu(mat)
-        x, y = cls.zeroes(*b.shape), cls.zeroes(*b.shape)
-        b = P @ b
-
-        n = y.shape[0]
-
-        for i in range(y.shape[1]):
-            for j in range(n):  # solve Ly = Pb for y (forward substitution)
-                y[j][i] = b[j][i]
-                for k in range(j):
-                    y[j][i] -= L[j][k] * y[k][i]
-
-            for j in range(n - 1, -1, -1):  # solve Ux = y for x (backward substitution)
-                x[j][i] = y[j][i]
-                for k in range(j+1, n):
-                    x[j][i] -= U[j][k] * x[k][i]
-                x[j][i] /= U[j][j]
-                
-        return x
 
     def __str__(self):
         r = ""

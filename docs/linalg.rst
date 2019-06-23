@@ -1,0 +1,5 @@
+linalg
+======
+
+.. automodule:: linalg
+  :members:

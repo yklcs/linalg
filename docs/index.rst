@@ -6,9 +6,14 @@
 Welcome to linalg's documentation!
 ==================================
 
+Welcome!
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   linalg
 
 
 
@@ -18,3 +23,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+* []

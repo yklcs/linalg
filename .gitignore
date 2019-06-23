@@ -2,3 +2,8 @@
 __pycache__
 dist
 *.egg-info
+docs/_build/
+_static
+_templates
+*.bat
+Makefile

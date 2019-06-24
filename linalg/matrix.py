@@ -73,7 +73,7 @@ class Matrix:
         :rtype: float
         """
 
-        return linalg.det(self)
+        return linalg.unary.det(self)
 
     def __str__(self):
         r = ""

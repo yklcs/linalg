@@ -1,4 +1,4 @@
-from linalg.matrix import Matrix
+from linalg import Matrix
 from linalg.create import identity
 from linalg.solve import linsolve
 from linalg.decompose import lu

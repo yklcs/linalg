@@ -1,4 +1,4 @@
-from linalg.matrix import Matrix
+from linalg import Matrix
 from linalg.create import zeroes
 import linalg
 
@@ -16,7 +16,7 @@ def lu(mat: Matrix) -> (Matrix, Matrix, Matrix, int):
     n = mat.shape[0]
 
     L, U = zeroes(n, n), zeroes(n, n)
-    P, S = linalg.unary.pivotize(mat)
+    P, S = pivotize(mat)
     A2 = P @ mat
 
     for j in range(n):

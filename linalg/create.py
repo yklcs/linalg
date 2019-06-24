@@ -1,4 +1,4 @@
-from linalg.matrix import Matrix
+from linalg import Matrix
 import random
 
 __all__ = ["zeroes", "identity", "random_matrix"]

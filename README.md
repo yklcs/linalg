@@ -1,7 +1,14 @@
 # linalg
 
-[![PyPI version](https://badge.fury.io/py/linalg.svg)](https://badge.fury.io/py/linalg)
+![PyPI](https://img.shields.io/pypi/v/linalg.svg)
 [![Documentation Status](https://readthedocs.org/projects/linalg/badge/?version=latest)](https://linalg.readthedocs.io/en/latest/?badge=latest)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/linalg.svg)
+
+## Installation
+
+Installation can be done through `pip`. You must have python version >= 3.6.
+
+    pip install linalg
 
 ## Docs
 

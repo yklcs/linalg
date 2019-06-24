@@ -1,5 +1,6 @@
-from operator import (add, neg)
+from operator import add, neg
 import linalg
+
 
 __all__ = ["Matrix"]
 

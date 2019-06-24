@@ -1,4 +1,4 @@
-from linalg import Matrix
+from linalg.types import Matrix
 from linalg.create import zeroes
 import linalg
 

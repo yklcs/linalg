@@ -1,4 +1,4 @@
-from linalg import Matrix
+from linalg.types import Matrix
 
 __all__ = ["as_matrix", "as_list"]
 

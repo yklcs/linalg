@@ -42,7 +42,9 @@ To create a matrix object, initialize it with a 2D list or use `Matrix.zeroes()`
     mat = linalg.as_matrix([[3, 4, 5], [2, 5, -1], [0, 2, 1]])  # 3x3 matrix, alternative notation
     mat = linalg.zeroes(4, 2)  # 4x2 zero matrix
     mat = linalg.identity(4)  # 4x4 identity matrix
-    mat = linalgrandom_matrix((2, 3), (-10, 10))  # 2x3 matrix with elements within (-10, 10)
+    mat = linalg.random_matrix((2, 3), (-10, 10))  # 2x3 matrix with elements within (-10, 10)
+
+This package implements matrix multiplication with the python matrix multiplication operator `@` (`__matmul__`). The matrix multiplication of two `linalg.Matrix` A, B is `C = A @ B`.
 
 After that, you can use multiple functions to perform linear algebraic operations as explained in the above linked docs.
 

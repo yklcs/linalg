@@ -6,15 +6,20 @@
 Welcome to linalg's documentation!
 ==================================
 
-Welcome!
-
+Welcome! This is the documentation for linalg, a simple python package for linear algebra.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   linalg
+  ..  linalg
+   Main docs <https://linalg.readthedocs.io/en/latest/>
+   GitHub Repository <https://github.com/rocketll/linalg/>
+   PyPI <https://pypi.org/project/linalg/>
 
+
+.. automodule:: linalg
+  :members:
 
 
 Indices and tables
@@ -23,4 +28,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-* []

@@ -6,7 +6,7 @@ URL = "https://github.com/rocketll/linalg"
 EMAIL = "luc4sl33@gmail.com"
 AUTHOR = "Lucas Lee"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.2.0"
+VERSION = "1.0.0"
 
 
 def readme():

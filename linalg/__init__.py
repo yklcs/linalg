@@ -1,8 +1,16 @@
 """Main functions and classes"""
 
-__all__ = ["Matrix", "zeroes", "identity", "random_matrix", "solve", "lu"]
+__all__ = ["Matrix"]
 
-from linalg.matrix import Matrix
-from linalg.create import *
-from linalg.decompose import *
-from linalg.solve import *
+from .matrix import Matrix
+from .create import *
+from .decompose import *
+from .solve import *
+from .unary import *
+from .data import *
+
+__all__.extend(create.__all__)
+__all__.extend(decompose.__all__)
+__all__.extend(solve.__all__)
+__all__.extend(unary.__all__)
+__all__.extend(data.__all__)

@@ -1,5 +1,8 @@
-from operator import *
+from operator import (add, neg)
 import linalg
+
+__all__ = ["Matrix"]
+
 
 class MatrixError(Exception):
     pass
@@ -36,70 +39,41 @@ class Matrix:
     def _is_square(self) -> bool:
         return self.shape[0] == self.shape[1]
 
-    def _pivotize(self) -> ("Matrix", int):
-        """creates the pivoting matrix for self
-
-        :return: the pivoting matrix for self and the number of permutations
-        :rtype: Matrix, int
+    def inverse(self) -> "Matrix":
         """
-        assert self._is_square()
-        n = self.shape[0]
-        S = 0
-        a = self.identity(n)
-        for j in range(n):
-            row = max(range(j, n), key=lambda i: abs(self[i][j]))
-            if j != row:
-                S += 1
-                a[j], a[row] = a[row], a[j]
+        returns the inverse matrix of mat
+        implemented as an alias of linalg.unary.inverse
 
-        return a, S
-
-    @staticmethod
-    def inverse(mat: "Matrix") -> "Matrix":
-        """returns the inverse matrix of mat
-        
         :param mat: the matrix to invert
         :type mat: Matrix
         :return: the inverse matrix of mat
         :rtype: Matrix
         """
-        assert mat._is_square()
-        return linalg.solve.solve(mat, linalg.create.identity(mat.shape[0]))
+        return linalg.unary.inverse(self)
 
-    @staticmethod
-    def transpose(mat: "Matrix") -> "Matrix":
-        x, y = mat.shape
-        return Matrix([[mat[a][b] for a in range(y)] for b in range(x)])
-
-    @staticmethod
-    def as_list(cls, mat: "Matrix") -> list:
-        """returns the matrix as a list
-        
-        :param mat: matrix to convert
-        :type mat: Matrix
-        :return: matrix as a 2d list
-        :rtype: list
+    def transpose(self) -> "Matrix":
         """
-        return mat.matrix
+        computes the transpose of self
+        implemented as an alias of linalg.unary.transpose    
 
-    @staticmethod
-    def det(cls, mat: "Matrix") -> float:
-        """computes the determinant for a given matrix
-        
-        :param mat: matrix to compute the determinant for
-        :type mat: Matrix
+        :return: transposed matrix
+        :rtype: Matrix
+        """
+        return linalg.unary.transpose(self)
+
+    inv = inverse  # Alias for inverse
+    T = transpose  # Alias for transpose
+
+    def det(self) -> float:
+        """
+        computes the determinant for self.
+        implemented as an alias of linalg.unary.det
+
         :return: the determinant for mat
         :rtype: float
         """
-        assert mat._is_square()
 
-        L, U, P, S = linalg.decompose.lu(mat)
-        n = mat.shape[0]
-        l_pd, u_pd = 1, 1
-        for i in range(n):
-            l_pd *= L[i][i]
-            u_pd *= U[i][i]
-        return (-1) ** S * l_pd * u_pd
+        return linalg.det(self)
 
     def __str__(self):
         r = ""

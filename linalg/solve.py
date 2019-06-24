@@ -2,8 +2,10 @@ from linalg.matrix import Matrix
 from linalg.create import zeroes
 from linalg.decompose import lu
 
+__all__ = ["linsolve"]
 
-def solve(mat: "Matrix", b: "Matrix") -> "Matrix":
+
+def linsolve(mat: Matrix, b: Matrix) -> Matrix:
     """solve a system of linear equations using LU decomposition
     
     :param mat: system of linear equations

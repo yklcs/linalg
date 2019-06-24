@@ -1,8 +1,10 @@
 from linalg.matrix import Matrix
 import random
 
+__all__ = ["zeroes", "identity", "random_matrix"]
 
-def zeroes(i: int, j: int) -> "Matrix":
+
+def zeroes(i: int, j: int) -> Matrix:
     """creates an i by j zero matrix
     
     :param i: number of columns
@@ -15,7 +17,7 @@ def zeroes(i: int, j: int) -> "Matrix":
     return Matrix([[0] * j for _ in range(i)], valid=True)
 
 
-def identity(n: int) -> "Matrix":
+def identity(n: int) -> Matrix:
     """generates an n by n identity matrix
     
     :param n: number of rows/columns
@@ -27,11 +29,21 @@ def identity(n: int) -> "Matrix":
     return Matrix(id)
 
 
-def random_matrix(dim: tuple, rng: tuple) -> "Matrix":
+def random_matrix(dim: tuple, rng: tuple, use_float: bool = False) -> Matrix:
     """generates a random matrix
-    
+
+    :param dim: dimensions of matrix
+    :type dim: tuple
+    :param rng: range of randomized elements
+    :type rng: tuple
+    :param float: whether to use floats for elements (default False)
+    :type float: bool
     :return: randomized matrix of specified size and range
     :rtype: Matrix
     """
-    ls = [random.sample(range(*rng), dim[1]) for _ in range(dim[0])]
+    ls = [[random.uniform(*rng) for _ in range(dim[1])] for _ in range(dim[0])]
+
+    if not use_float:
+        ls = [[round(x) for x in row] for row in ls]
+
     return Matrix(ls)

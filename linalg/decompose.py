@@ -1,21 +1,22 @@
 from linalg.matrix import Matrix
 from linalg.create import zeroes
+import linalg
 
-def make_householder():
-    ...
+__all__ = ["lu"]
 
-def lu(mat: "Matrix") -> ("Matrix", "Matrix", "Matrix", int):
+
+def lu(mat: Matrix) -> (Matrix, Matrix, Matrix, int):
     """implements LUP decomposition 
 
     :return: returns a tuple with L, U, and P
-    :rtype: "Matrix", "Matrix", "Matrix", int
+    :rtype: Matrix, Matrix, Matrix, int
     """
     assert mat._is_square()
 
     n = mat.shape[0]
 
     L, U = zeroes(n, n), zeroes(n, n)
-    P, S = mat._pivotize()
+    P, S = linalg.unary.pivotize(mat)
     A2 = P @ mat
 
     for j in range(n):
